@@ -19,7 +19,7 @@ To get the information of future tokens in the sequence, the authors in [2] also
 
 We approached the Medical Entity Extraction task as a token classification task; the classes being “Problem”, “Treatment” and “Test”. And since we adopted BIO tagging as our labeling convention, specifically our classes are “B-Problem”, “I-Problem”, “B-Test”, “I-Test”, “B-Treatment”, “I-Treatment” and “Other”. Finally, we implemented DNC in PyTorch and programmed it to classify each input tokens into one of these classes.
 
-## Data Preprocessing
+## Data pre-processing
 As such, the data required a moderate amount of preprocessing. We first tokenized each Medical Summary into words and removed noisy characters such as “\n” and more than one space. From the “.con” files, we extracted entities for making true labels. After this step, we converted all the words into word2vec vectors using the pre-trained word2vec embeddings on the PubMed corpus and MeSH RDF from [3]. After that, we divided the data into batches and fed them into the DNC.
 
 ## Training

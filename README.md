@@ -1,4 +1,4 @@
-# Medical Entity Extraction from Clinical Notes using Differentiable Neural Computer
+# Medical Entity Extraction from Clinical Notes using DNC
 
 ## Collaborators
 [Deep C. Patel](https://github.com/deepcpatel) and [Akshay Shah](https://github.com/shahakshay11)
@@ -39,7 +39,7 @@ Macro average F1 Score: **0.73**
 
 ## Future work
 (1).​ Use BERT embeddings as word embeddings for the data instead of word2vec.<br/>
-(2). Along with word embeddings, add character level embeddings, Parts Of Speech information to the input as outlined in [4].
+(2). Along with word embeddings, add character level embeddings, Parts Of Speech information to input as outlined in [4].
 
 ## Final message
 We welcome contributions, suggestions or any bug findings in our work.

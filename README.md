@@ -26,7 +26,7 @@ As such, the data required a moderate amount of preprocessing. We first tokenize
 We trained our DNC with a batch size of 10 for 100 epochs using Nvidia GTX 1080 GPU. The training took us approximately 10 hours. To update weights, we calculated Softmax Cross-Entropy loss between predicted output and labels and propagated gradients back to the model for weight updation. Since the DNC is fully differentiable end to end, the backpropagation algorithm can be easily used to update its weights. We used only one read and write head in DNC with a memory size of 128 x 128.
 
 ## Results
-The results of our model are outlined as follows. To clarify at the beginning, we consider a classification to be True Positive only if all the words in an entity correctly matches with that of the corresponding label (exact match) and hence adds +1 to our True Positive score, else adds +1 to False Negative score.
+The results of our model are outlined as follows. Please note that, we consider a classification to be True Positive only if all the words in an entity correctly matches with that of the corresponding label (exact match) and hence adds +1 to our True Positive score, else adds +1 to False Negative score.
 
 | Entity Type | Precision | Recall | F1 Score |
 |---|---|---|---|

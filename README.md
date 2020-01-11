@@ -17,10 +17,10 @@ As indicated above, DNC was used for question answering task in the original pap
 
 To get the information of future tokens in the sequence, the authors in [2] also proposed to use a backward LSTM controller in parallel to DNC. These modifications to DNC showed robust performance during question answering task according to them. Thus, to make our Entity Extraction task robust, we also modified our DNC implementation as recommended in [2].
 
-We approached the Medical Entity Extraction task as a token classification task; the classes being “Problem”, “Treatment” and “Test”. And since we adopted BIO tagging as our labeling convention, specifically our classes are “B-Problem”, “I-Problem”, “B-Test”, “I-Test”, “B-Treatment”, “I-Treatment” and “Other”. Finally, we implemented DNC in PyTorch and programmed it to classify each input tokens into one of these classes.
+We approached the Medical Entity Extraction task as a token classification task; the classes being `Problem`, `Treatment` and `Test`. And since we adopted BIO tagging as our labeling convention, specifically our classes are `B-Problem`, `I-Problem`, `B-Test`, `I-Test`, `B-Treatment`, `I-Treatment` and `Other`. Finally, we implemented DNC in PyTorch and programmed it to classify each input tokens into one of these classes.
 
 ## Data pre-processing
-As such, the data required a moderate amount of preprocessing. We first tokenized each Medical Summary into words and removed noisy characters such as “\n” and more than one space. From the “.con” files, we extracted entities for making true labels. After this step, we converted all the words into word2vec vectors using the pre-trained word2vec embeddings on the PubMed corpus and MeSH RDF from [3]. After that, we divided the data into batches and fed them into the DNC.
+As such, the data required a moderate amount of preprocessing. We first tokenized each Medical Summary into words and removed noisy characters such as `\n` and more than one space. From the `.con` files, we extracted entities for making true labels. After this step, we converted all the words into word2vec vectors using the pre-trained word2vec embeddings on the PubMed corpus and MeSH RDF from [3]. After that, we divided the data into batches and fed them into the DNC.
 
 ## Training
 We trained our DNC with a batch size of 10 for 100 epochs using Nvidia GTX 1080 GPU. The training took us approximately 10 hours. To update weights, we calculated Softmax Cross-Entropy loss between predicted output and labels and propagated gradients back to the model for weight updation. Since the DNC is fully differentiable end to end, the backpropagation algorithm can be easily used to update its weights. We used only one read and write head in DNC with a memory size of 128 x 128.
@@ -45,8 +45,8 @@ Macro average F1 Score: **0.73**
 We welcome contributions, suggestions or any bug findings in our work.
 
 ## References
-[1]. A. Graves, et. al. Hybrid Computing Using a Neural Network with Dynamic External Memory. Nature 538, 471-476, 2016.<br/>
-[2]. ​J. Franke, J. Niehues, A. Waibel. Robust and Scalable Differentiable Neural Computer for Question Answering. arXiv preprint arXiv:1807.02658, 2018.<br/>
-[3]. Y. Zhang, Q. Chen, Z. Yang, H. Lin, Z. Lu. ​BioWordVec, Improving biomedical word embeddings with subword information and MeSH. Scientific Data, 2019.<br/>
-[4]. J.P.C. Chiu, E. Nichols. Named Entity Recognition with Bidirectional LSTM-CNNs. Transactions of the Association for Computational Linguistics, Volume 4, 2016.<br/>
-[5]. Ö. Uzuner, B.R. South, S. Shen, et al. 2010 i2b2/VA challenge on concepts, assertions, and relations in clinical text. J Am Med Inform Assoc, 18:552–6, 2011.
+**[1]**. A. Graves, et. al. Hybrid Computing Using a Neural Network with Dynamic External Memory. Nature 538, 471-476, 2016.<br/>
+**[2]**. ​J. Franke, J. Niehues, A. Waibel. Robust and Scalable Differentiable Neural Computer for Question Answering. arXiv preprint arXiv:1807.02658, 2018.<br/>
+**[3]**. Y. Zhang, Q. Chen, Z. Yang, H. Lin, Z. Lu. ​BioWordVec, Improving biomedical word embeddings with subword information and MeSH. Scientific Data, 2019.<br/>
+**[4]**. J.P.C. Chiu, E. Nichols. Named Entity Recognition with Bidirectional LSTM-CNNs. Transactions of the Association for Computational Linguistics, Volume 4, 2016.<br/>
+**[5]**. Ö. Uzuner, B.R. South, S. Shen, et al. 2010 i2b2/VA challenge on concepts, assertions, and relations in clinical text. J Am Med Inform Assoc, 18:552–6, 2011.

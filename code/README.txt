@@ -4,7 +4,7 @@ The code is written in Python 3.6 in Ubuntu 18.04 Operating System.
 
 Libraries required:
 NumPy
-PyTorch
+PyTorch 1.1.0
 
 ********************************************************************************
 

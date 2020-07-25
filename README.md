@@ -39,7 +39,8 @@ Macro average F1 Score: **0.73**
 
 ## Future work
 (1).​ Use BERT embeddings as word embeddings for the data instead of word2vec.<br/>
-(2). Along with word embeddings, add character level embeddings, Parts Of Speech information to input as outlined in [4].
+(2). Along with word embeddings, add character level embeddings, Parts Of Speech information to input as outlined in [4]. <br/>
+(3). The `Other` class forms majority of all the classes. This is the classic class imbalance problem and we may improve the model performance by mitigating this using various available techniques.
 
 ## Final message
 We welcome contributions, suggestions or any bug findings in our work.

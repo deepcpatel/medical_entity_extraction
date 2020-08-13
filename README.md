@@ -17,16 +17,16 @@ As indicated above, DNC was used for question answering task in the original pap
 
 To get the information of future tokens in the sequence, the authors in [2] also proposed to use a backward LSTM controller in parallel to DNC. These modifications to DNC showed robust performance during question answering task according to them. Thus, to make our Entity Extraction task robust, we also modified our DNC implementation as recommended in [2].
 
-We approached the Medical Entity Extraction task as a token classification task; the classes being `Problem`, `Treatment` and `Test`. And since we adopted BIO tagging as our labeling convention, specifically our classes are `B-Problem`, `I-Problem`, `B-Test`, `I-Test`, `B-Treatment`, `I-Treatment` and `Other`. Finally, we implemented DNC in PyTorch and trained it to classify each input tokens into one of these classes.
+We approached the Medical Entity Extraction task as a token classification task; the classes being `Problem`, `Treatment` and `Test`. And since we adopted BIO tagging as our labelling convention, specifically our classes are `B-Problem`, `I-Problem`, `B-Test`, `I-Test`, `B-Treatment`, `I-Treatment` and `Other`. Finally, we implemented DNC in PyTorch and trained it to classify each input token into one of these classes.
 
 ## Data pre-processing
-As such, the data required a moderate amount of preprocessing. We first tokenized each Medical Summary into words and removed noisy characters such as `\n` and more than one space. From the `.con` files, we extracted entities for making true labels. After this step, we converted all the words into word2vec vectors using the pre-trained word2vec embeddings on the PubMed corpus and MeSH RDF from [3]. After that, we divided the data into batches and fed them into the DNC.
+As such, the data required a moderate amount of preprocessing. We first tokenized each Medical Summary into words and removed noisy characters such as `\n` and more than one space. From the `.con` files, we extracted entities for making true labels. After this step, we converted all the words into word2vec vectors using the pre-trained word2vec embeddings on the PubMed corpus and MeSH RDF from [3]. After that, we divided the data into batches and fed them to the DNC.
 
 ## Training
-We trained our DNC with a batch size of 10 for 100 epochs using Nvidia GTX 1080 GPU. The training took us approximately 10 hours. To update weights, we calculated Softmax Cross-Entropy loss between predicted output and labels and propagated gradients back to the model for weight updation. Since the DNC is fully differentiable end to end, the backpropagation algorithm can be easily used to update its weights. We used only one read and write head in DNC with a memory size of 128 x 128.
+We trained our DNC with a batch size of 10 for 100 epochs using Nvidia GTX 1080 GPU. The training took us approximately 10 hours. To update the weights, we calculated Softmax Cross-Entropy loss between predicted output and true labels and propagated gradients back to the model. Since the DNC is fully differentiable end to end, the backpropagation algorithm can be easily used to update its weights. We used only one read and write head in DNC with a memory size of 128 x 128.
 
 ## Results
-The results of our model are outlined as follows. Please note that, we consider a classification to be True Positive only if all the words in an entity correctly matches with that of the corresponding label (exact match) and hence adds +1 to our True Positive score, else adds +1 to False Negative score.
+The results of our model are outlined as follows. Please note that, we consider a classification to be True Positive only if all the words in an entity correctly matches with that of the corresponding label (exact match) and hence add +1 to our True Positive score, else add +1 to False Negative score.
 
 | Entity Type | Precision | Recall | F1 Score |
 |---|---|---|---|
@@ -39,7 +39,7 @@ Macro average F1 Score: **0.73**
 
 ## Future work
 (1).​ Use BERT embeddings as word embeddings for the data instead of word2vec.<br/>
-(2). Along with word embeddings, add character level embeddings, Parts Of Speech information to input as outlined in [4]. <br/>
+(2). Along with the word embeddings, add character level embeddings, Parts Of Speech information to the input as outlined in [4]. <br/>
 (3). The `Other` class forms majority of all the classes. This is the classic class imbalance problem and we may improve the model performance by mitigating this using various available techniques.
 
 ## Final message

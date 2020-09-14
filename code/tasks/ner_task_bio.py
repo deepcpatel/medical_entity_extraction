@@ -473,8 +473,6 @@ class task_NER():
                 Y_out = torch.empty((X.shape[0], X.shape[1], self.num_outputs), dtype=torch.float32)    # dim: (seq_len x batch_size x num_output)
 
                 # Feeding the DNC network all the data first and then predicting output
-                # by giving zero vector as input and previous read states and hidden vector
-                # and thus training vector this way to give outputs matching the labels
 
                 embeddings = self.machine.backward_prediction(X)        # Creating embeddings from data for backward calculation
                 temp_size = X.shape[0]
